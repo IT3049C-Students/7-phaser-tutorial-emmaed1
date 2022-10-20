@@ -3,39 +3,39 @@ class Scene1 extends Phaser.Scene{
         super("bootGame");
     }
     preload(){
-        this.load.image("background", "gameFolder/assets/images/background.png");
-        this.load.spritesheet("ship", "gameFolder/assests/spritesheets/ship.png", {
+        this.load.image("background", "assets/images/background.png");
+        this.load.spritesheet("ship", "assests/spritesheets/ship.png", {
             frameWidth: 16,
             frameHeight: 16
         });
-        this.load.spritesheet("ship2", "gameFolder/assests/spritesheets/ship2.png", {
+        this.load.spritesheet("ship2", "assests/spritesheets/ship2.png", {
             frameWidth: 32,
             frameHeight: 16
         });
-        this.load.spritesheet("ship3", "gameFolder/assests/spritesheets/ship3.png", {
+        this.load.spritesheet("ship3", "assests/spritesheets/ship3.png", {
             frameWidth: 32,
             frameHeight: 32
         });
-        this.load.spritesheet("explosion", "gameFolder/assests/spritesheets/explosion.png", {
+        this.load.spritesheet("explosion", "assests/spritesheets/explosion.png", {
             frameWidth: 16,
             frameHeight: 16
         });
-        this.load.spritesheet("power-up", "gameFolder/assests/spritesheets/power-up.png", {
+        this.load.spritesheet("power-up", "assests/spritesheets/power-up.png", {
             frameWidth: 16,
             frameHeight: 16
         });
-        this.load.spritesheet("player", "gameFolder/assests/spritesheets/player.png", {
+        this.load.spritesheet("player", "assests/spritesheets/player.png", {
             frameWidth: 16,
             frameHeight: 24
         });
-        this.load.spritesheet("beam", "gameFolder/assests/spritesheets/beam.png", {
+        this.load.spritesheet("beam", "assests/spritesheets/beam.png", {
             frameWidth: 16,
             frameHeight: 16
         });
     
-        this.load.image("ship", "gameFolder/assets/images/ship.png");
-        this.load.image("ship2", "gameFolder/assets/images/ship2.png");
-        this.load.image("ship3", "gameFolder/assets/images/ship3.png");
+        this.load.image("ship", "assets/images/ship.png");
+        this.load.image("ship2", "assets/images/ship2.png");
+        this.load.image("ship3", "assets/images/ship3.png");
     }
     create(){
         this.add.text(20, 20, "Loading game...");
