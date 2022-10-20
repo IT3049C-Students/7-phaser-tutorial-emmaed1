@@ -1,7 +1,8 @@
-window.onload = function(){
-    var game = new Phaser.Game(config);
+var gameSettings = {
+    playerspeed: 200,
 }
-var config = {
+
+var config ={
     width: 256,
     height: 272,
     backgroundColor: 0x000000,
@@ -13,4 +14,7 @@ var config = {
             debug: false
         }
     }
+}
+window.onload = function(){
+    var game = new Phaser.Game(config);
 }

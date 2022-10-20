@@ -25,14 +25,14 @@ class Scene2 extends Phaser.Scene{
         this.input.on('gameobjectdown', this.destroyShip, this);
         this.powerUps = this.physics.add.group();
         var maxObjects = 4;
-        for (var i = 0; i <= maxObjects; i++) {
+        for (var i = 0; i <= maxObjects; i++){
             var powerUp = this.physics.add.sprite(16, 16, "power-up");
             this.powerUps.add(powerUp);
             powerUp.setRandomPosition(0, 0, config.width, config.height);
 
-            if (Math.random() > 0.5) {
+            if (Math.random() > 0.5){
                 powerUp.play("red");
-            } else {
+            }else{
                 powerUp.play("gray");
             }
 
@@ -47,8 +47,9 @@ class Scene2 extends Phaser.Scene{
         this.player.setCollideWorldBounds(true);
 
         this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.projectiles = this.add.group();
 
-        this.add.text(20, 20, "Playing game", {
+        this.add.text(20, 20, "Playing game",{
             font:"25px Arial", 
             fill: "yellow"
         });
@@ -61,20 +62,24 @@ class Scene2 extends Phaser.Scene{
         this.background.tilePositionY -= 0.5;
         this.movePlayerManager();
 
-        if (Phaser.Input.Keyboard.JustDown(this.spacebar)) {
-            console.log("Fire!");
+        if (Phaser.Input.Keyboard.JustDown(this.spacebar)){
+            this.shootBeam();
+        }
+        for (var i = 0; i < this.projectiles.getChildren().length; i++) {
+            var beam = this.projectiles.getChildren()[i];
+            beam.update();
         }
     }
-    movePlayerManager() {
-        if (this.cursorKeys.left.isDown) {
+    movePlayerManager(){
+        if (this.cursorKeys.left.isDown){
             this.player.setVelocityX(-gameSettings.playerSpeed);
-        } else if (this.cursorKeys.right.isDown) {
+        } else if (this.cursorKeys.right.isDown){
             this.player.setVelocityX(gameSettings.playerSpeed)
         }
 
-        if (this.cursorKeys.up.isDown) {
+        if (this.cursorKeys.up.isDown){
             this.player.setVelocityY(-gameSettings.playerSpeed);
-        } else if (this.cursorKeys.down.isDown) {
+        } else if (this.cursorKeys.down.isDown){
             this.player.setVelocityY(gameSettings.playerSpeed)
         }
     }
@@ -92,5 +97,9 @@ class Scene2 extends Phaser.Scene{
     destroyShip(pointer, gameObject){
         gameObject.setTexture("explosion");
         gameObject.play("explode");
-    }   
+    }
+    shootBeam(){
+        var beam = new Beam(this);
+        this.projectiles.add(beam);
+    }
 }
