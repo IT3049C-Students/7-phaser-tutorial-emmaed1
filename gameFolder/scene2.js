@@ -3,7 +3,11 @@ class Scene2 extends Phaser.Scene{
         super("playGame");
     }
     create(){
-        this.background = this.add.image(0, 0, "backgound");
+        this.add.text(20, 20, "Playing game",{
+            font:"25px Arial", 
+            fill: "yellow"
+        });
+        this.background = this.add.image(0, 0, config.width, config.height, "backgound");
         this.background.setOrigin(0, 0);
 
         this.ship1 = this.add.image(config.width/2 - 50, config.height/2, "ship");
@@ -61,11 +65,7 @@ class Scene2 extends Phaser.Scene{
         this.physics.add.overlap(this.player, this.powerUps, this.pickPowerUp, null, this);
         this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer, null, this);
         this.physics.add.overlap(this.projectiles, this.enemies, this.hitEnemy, null, this);
-
-        this.add.text(20, 20, "Playing game",{
-            font:"25px Arial", 
-            fill: "yellow"
-        });
+        
     }
     update(){
         this.moveShip(this.ship1, 1);
@@ -76,7 +76,9 @@ class Scene2 extends Phaser.Scene{
         this.movePlayerManager();
 
         if (Phaser.Input.Keyboard.JustDown(this.spacebar)){
-            this.shootBeam();
+            if (this.player.active) {
+                this.shootBeam();
+            }
         }
         for (var i = 0; i < this.projectiles.getChildren().length; i++) {
             var beam = this.projectiles.getChildren()[i];
@@ -119,13 +121,13 @@ class Scene2 extends Phaser.Scene{
         powerUp.disableBody(true, true);
     }
     hurtPlayer(player, enemy){
-        // this.resetShipPos(enemy);
-        // player.x = config.width /2  -8;
-        // player.y = config.height -64;
         this.resetShipPos(enemy);
-        if (this.player.alpha < 1) {
-            return;
-        }
+        player.x = config.width /2  -8;
+        player.y = config.height -64;
+        // this.resetShipPos(enemy);
+        // if (this.player.alpha < 1) {
+        //     return;
+        // }
         var explosion = new Explosion(this, player.x, player.y);
         player.disableBody(true, true);
         this.time.addEvent({
