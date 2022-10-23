@@ -32,6 +32,8 @@ class Scene1 extends Phaser.Scene{
             frameWidth: 16,
             frameHeight: 16
         });
+
+        this.load.bitmapFont("pixelFont", "gameFolder/assets/font/font.png", "gameFolder/assets/font/font.xml");
     
         this.load.image("ship", "gameFolder/assets/images/ship.png");
         this.load.image("ship2", "gameFolder/assets/images/ship2.png");
@@ -51,7 +53,7 @@ class Scene1 extends Phaser.Scene{
             key: "ship2_anim",
             frames: this.anims.generateFrameNumbers("ship2"),
             frameRate: 20,
-            repeat: 1
+            repeat: -1
         });
         this.anims.create({
             key: "ship3_anim",
