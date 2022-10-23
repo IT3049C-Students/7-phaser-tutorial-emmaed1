@@ -1,17 +1,17 @@
 var gameSettings = {
-    playerspeed: 200,
+    playerSpeed: 200,
 }
 
-var config ={
+var config = {
     width: 256,
     height: 272,
     backgroundColor: 0x000000,
     scene: [Scene1, Scene2],
     pixelArt: true,
-    physics:{
+    physics: {
         default: "arcade",
-        arcade:{
-            debug: false,
+        arcade: {
+            debug: false
         }
     }
 }

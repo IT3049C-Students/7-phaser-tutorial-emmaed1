@@ -47,7 +47,7 @@ class Scene1 extends Phaser.Scene{
             key: "ship1_anim",
             frames: this.anims.generateFrameNumbers("ship"),
             frameRate: 20,
-            repeat: 1
+            repeat: -1
         });
         this.anims.create({
             key: "ship2_anim",
