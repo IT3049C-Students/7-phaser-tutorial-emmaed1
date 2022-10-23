@@ -3,7 +3,7 @@ class Scene2 extends Phaser.Scene{
         super("playGame");
     }
     create(){
-        this.background = this.add.image(0, 0, config.width, config.height, "background");
+        this.background = this.add.tileSprite(0, 0, config.width, config.height, "background");
         this.background.setOrigin(0, 0);
 
         /* this.ship1 = this.add.image(config.width/2 - 50, config.height/2, "ship");
