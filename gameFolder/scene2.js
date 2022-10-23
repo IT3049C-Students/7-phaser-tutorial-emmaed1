@@ -3,16 +3,16 @@ class Scene2 extends Phaser.Scene{
         super("playGame");
     }
     create(){
-        this.background = this.add.image(0, 0, config.width, config.height, "backgound");
+        this.background = this.add.image(0, 0, config.width, config.height, "background");
         this.background.setOrigin(0, 0);
 
         /* this.ship1 = this.add.image(config.width/2 - 50, config.height/2, "ship");
         this.ship2 = this.add.image(config.width/2, config.height/2, "ship2");
         this.ship3 = this.add.image(config.width/2 + 50, config.height/2, "ship3"); */
 
-        this.ship1 = this.add.sprite(config.width/2 - 50, config.height/2, "ship");
-        this.ship2 = this.add.sprite(config.width/2, config.height/2, "ship2");
-        this.ship3 = this.add.sprite(config.width/2 + 50, config.height/2, "ship3");
+        this.ship1 = this.add.sprite(config.width / 2 - 50, config.height / 2, "ship");
+        this.ship2 = this.add.sprite(config.width / 2, config.height / 2, "ship2");
+        this.ship3 = this.add.sprite(config.width / 2 + 50, config.height / 2, "ship3");
 
         this.enemies = this.physics.add.group();
         this.enemies.add(this.ship1);
@@ -58,12 +58,12 @@ class Scene2 extends Phaser.Scene{
             projectile.destroy();
         });
 
-        let graphics = this.add.graphics();
+        var graphics = this.add.graphics();
         graphics.fillStyle(0x000000, 1);
         graphics.beginPath();
         graphics.moveTo(0, 0);
-        graphics.lineTo(this.game.config.width, 0);
-        graphics.lineTo(this.game.config.width, 20);
+        graphics.lineTo(config.width, 0);
+        graphics.lineTo(config.width, 20);
         graphics.lineTo(0, 20);
         graphics.lineTo(0, 0);
         graphics.closePath();
@@ -116,8 +116,8 @@ class Scene2 extends Phaser.Scene{
     }
     resetShipPos(ship){
         ship.y = 0;
-        var randomX = Pahser.Math.Between(0, config.width);
-        ship.x = randomX
+        var randomX = Phaser.Math.Between(0, config.width);
+        ship.x = randomX;
     }
     destroyShip(pointer, gameObject){
         gameObject.setTexture("explosion");
@@ -131,10 +131,6 @@ class Scene2 extends Phaser.Scene{
         powerUp.disableBody(true, true);
     }
     hurtPlayer(player, enemy){
-
-        // this.resetShipPos(enemy);
-        // player.x = config.width /2  -8;
-        // player.y = config.height -64;
         this.resetShipPos(enemy);
         if (this.player.alpha < 1) {
             return;
@@ -149,6 +145,7 @@ class Scene2 extends Phaser.Scene{
         });
     }
     hitEnemy(projectile, enemy){
+        var explosion = new Explosion(this, enemy.x, enemy.y);
         projectile.destroy();
         this.resetShipPos(enemy);
         this.score += 15;
@@ -161,5 +158,24 @@ class Scene2 extends Phaser.Scene{
             stringNumber = "0" + stringNumber;
         }
         return stringNumber;
+    }
+    resetPlayer() {
+        var x = config.width / 2 - 8;
+        var y = config.height + 64;
+        this.player.enableBody(true, x, y, true, true);
+
+        this.player.alpha = 0.5;
+
+        var tween = this.tweens.add({
+            targets: this.player,
+            y: config.height - 64,
+            ease: "Power1",
+            duration: 1500,
+            repeat: 0,
+            onComplete: function() {
+                this.player.alpha = 1;
+            },
+            callbackScope: this
+        });
     }
 }
